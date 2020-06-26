@@ -1,0 +1,92 @@
+---
+title: "About"
+layout: "default"
+---
+
+<!-- style="background-image: url({{ '/assets/images/bg-1-vertical-flip.jpeg' | relative_url }});" -->
+<div
+  class="container shadow-lg p-2 text-light border border-dark rounded-lg"
+  style="background-image: url({{ '/assets/images/bg-4-dark.jpg' | relative_url }});
+  background-size: cover;"
+>
+  <div class="h1">How is your grade calculated?</div>
+
+  <div class="my-5 mx-3">
+    <div class="h2">Scoring</div>
+
+    <div class="lead">
+      Internal Assesment
+      <mark class="bg-dark text-white shadow-lg p-2 m-2 rounded-lg">IA</mark>
+      <span class="m-2">=</span> Sessional Score (30) + Assignment Score (20)
+      <br /><em>[ 50 Marks ]</em>
+    </div>
+
+    <hr class="bg-dark" />
+
+    <div class="lead">
+      End Semester Assesment
+      <mark class="bg-dark text-white shadow-lg p-2 m-2 rounded-lg">ES</mark>
+      <span class="m-2">=</span> (0.5 x IA) + (2.5 x Previous Semester GPA)
+      <br /><em>[ 50 Marks ]</em>
+    </div>
+
+    <hr class="bg-dark" />
+
+    <div class="lead">
+      Total score
+      <mark class="bg-dark text-white shadow-lg p-2 m-2 rounded-lg">TS</mark> =
+      <mark class="bg-dark text-white shadow-lg p-2 m-2 rounded-lg">IA</mark> +
+      <mark class="bg-dark text-white shadow-lg p-2 m-2 rounded-lg">ES</mark>
+      <br class="mb-2" />
+      <em>[ 100 Marks ]</em>
+    </div>
+  </div>
+
+  <hr class="bg-dark" />
+
+  <div class="my-5 mx-3">
+    <div class="h2">Grading</div>
+
+    <div class="col-xs-12 col-md-8 border border-dark rounded-lg">
+      <table class="table table-striped table-borderless text-light">
+        <thead>
+          <tr>
+            <th scope="col"><u>Range of Marks</u></th>
+            <th scope="col"><u>Grade</u></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">Less than 40</th>
+            <td>F</td>
+          </tr>
+          <tr>
+            <th scope="row">40 - 49 marks</th>
+            <td>E</td>
+          </tr>
+          <tr>
+            <th scope="row">50 - 59 marks</th>
+            <td>D</td>
+          </tr>
+          <tr>
+            <th scope="row">60 - 69 marks</th>
+            <td>C</td>
+          </tr>
+          <tr>
+            <th scope="row">70 - 79 marks</th>
+            <td>B</td>
+          </tr>
+          <tr>
+            <th scope="row">80 - 89 marks</th>
+            <td>A</td>
+          </tr>
+          <tr>
+            <th scope="row">90 and above</th>
+            <td>A+</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

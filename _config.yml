@@ -1,0 +1,9 @@
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/gradecalc" # the subpath of your site, e.g. /blog
+title: "gradecalc" # the name of your site, e.g. ACME Corp.
+description: "Calculate your grade - Manipal Institute Of Technology"
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
