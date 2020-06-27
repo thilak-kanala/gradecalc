@@ -1,17 +1,373 @@
 ---
-title: "Grade Calculator - Manipal"
-layout: "default"
-branch: Computer Science
+layout: default
 ---
 
+<nav
+  class="navbar navbar-dark bg-dark p-3 mb-3"
+  style="background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }});
+  background-size: cover;"
+>
+  <div>
+    <a
+      class="navbar-brand btn btn-outline-dark pt-2 my-2"
+      href="{{ 'index.html' | relative_url }}"
+      ><h2>Grade Calculator</h2></a
+    >
+
+    <div class="dropdown btn btn-outline-info p-1 pt-2 my-2">
+      <a
+        class="nav-link dropdown-toggle text-light h6"
+        href="#"
+        id="navbarDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span id="branch-name">Computer Science</span>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <button class="dropdown-item" onclick="generate('Computer Science')">
+          Computer Science
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Electronics and Communication')"
+        >
+          Electronics and Communication
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Computer & Communication')"
+        >
+          Computer & Communication
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Information Technology')"
+        >
+          Information Technology
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Aeronautical Engineering')"
+        >
+          Aeronautical Engineering
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Electronics & Instrumentation')"
+        >
+          Electronics & Instrumentation
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Mechanical Engineering')"
+        >
+          Mechanical Engineering
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Industrial & Production')"
+        >
+          Industrial & Production
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" onclick="generate('Mechatronics')">
+          Mechatronics
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" onclick="generate('Media Technology')">
+          Media Technology
+        </button>
+        <div class="dropdown-divider"></div>
+        <button
+          class="dropdown-item"
+          onclick="generate('Automobile Engineering')"
+        >
+          Automobile Engineering
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" onclick="generate('Biomedical')">
+          Biomedical
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" onclick="generate('Biotechnology')">
+          Biotechnology
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" onclick="generate('Chemical')">
+          Chemical
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item" onclick="generate('Civil')">
+          Civil
+        </button>
+        <div class="dropdown-divider"></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <a
+      class="navbar-brand btn btn-outline-info my-2"
+      href="{{ 'about.html' | relative_url }}"
+      >About</a
+    >
+  </div>
+</nav>
+
 <div
-  class="container shadow-lg p-2 text-light border border-dark rounded-lg"
+  id="content"
+  class="container p-0"
   style="background-image: url({{ '/assets/images/bg-4-dark.jpg' | relative_url }});
   background-size: cover;"
 >
-  <!-- <div class="display-4">Please select your branch</div> -->
+  <div
+    id="content"
+    class="container shadow-lg p-2 text-light border border-dark rounded-lg"
+  >
+    <form id="marks">
+      <!-- Theory -->
+      <div class="mx-5">
+        <p class="display-4 mb-0">
+          Theory
+        </p>
+        <p class="lead">
+          <em> Enter sessional score (0-30) and assignment score (0-20)</em>
+        </p>
+      </div>
 
-  <script>
-    window.location.replace("{{ 'cse.html' | relative_url }}");
-  </script>
+      <div class="row m-3 justify-content-around">
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Database Systems</h5>
+            <hr class="bg-dark" />
+            <label for="s1-sessional">Sessional</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s1-sessional"
+              name="s1-sessional"
+            />
+            <br />
+            <label for="s1-assignment">Assignment</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s1-assignment"
+              name="s1-assignment"
+            />
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Design and Analysis of Algorithms</h5>
+            <hr class="bg-dark" />
+            <label for="s2-sessional">Sessional</label><br />
+            <input
+              bg-secondary
+              text-white
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s2-sessional"
+              name="s2-sessional"
+            />
+            <br />
+            <label for="s2-assignment">Assignment</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s2-assignment"
+              name="s2-assignment"
+            />
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Embedded Systems</h5>
+            <hr class="bg-dark" />
+            <label for="s3-sessional">Sessional</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s3-sessional"
+              name="s3-sessional"
+            />
+            <br />
+            <label for="s3-assignment">Assignment</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s3-assignment"
+              name="s3-assignment"
+            />
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Formal Languages and Automata Theory</h5>
+            <hr class="bg-dark" />
+            <label for="s4-sessional">Sessional</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s4-sessional"
+              name="s4-sessional"
+            />
+            <br />
+            <label for="s4-assignment">Assignment</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s4-assignment"
+              name="s4-assignment"
+            />
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">MATH - IV</h5>
+            <hr class="bg-dark" />
+            <label for="s5-sessional">Sessional</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s5-sessional"
+              name="s5-sessional"
+            />
+            <br />
+            <label for="s5-assignment">Assignment</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s5-assignment"
+              name="s5-assignment"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Lab -->
+      <div class="mx-5">
+        <h1 class="display-4 mb-0">Lab</h1>
+        <p class="lead"><em> Enter lab score (0-100) </em></p>
+      </div>
+
+      <div class="row m-3 justify-content-around">
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Algorithms Lab</h5>
+            <hr class="bg-dark" />
+            <label for="s6-total">Total</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s6-total"
+              name="s6-total"
+            />
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Database Systems Lab</h5>
+            <hr class="bg-dark" />
+            <label for="s7-total">Total</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s7-total"
+              name="s7-total"
+            />
+          </div>
+        </div>
+
+        <div
+          class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+        >
+          <div class="card-body">
+            <h5 class="card-title text-center">Embedded Systems Lab</h5>
+            <hr class="bg-dark" />
+            <label for="s8-total">Total</label><br />
+            <input
+              step="any"
+              type="number"
+              class="form-control bg-dark border border-dark text-white"
+              id="s8-total"
+              name="s8-total"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group m-4">
+        <label for="prev_gpa" class="h1">Previous Semester GPA</label>
+        <input
+          step="any"
+          type="number"
+          class="form-control bg-dark border border-dark text-white"
+          id="prev_gpa"
+          name="previous gpa"
+        />
+      </div>
+
+      <div class="mx-auto" style="width: max-content;">
+        <button
+          id="result-btn"
+          type="button"
+          class="btn btn-dark btn-lg"
+          onclick="grade('Computer Science')"
+        >
+          Get Results
+        </button>
+      </div>
+    </form>
+
+    <div
+      id="result"
+      class="col-sm-12 col-md-6 mx-auto m-5 h5 border border-secondary rounded-lg"
+    ></div>
+  </div>
 </div>
+<script
+  type="text/javascript"
+  src="{{ '/assets/js/calculate_grade.js' | relative_url }}"
+></script>

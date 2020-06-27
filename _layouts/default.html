@@ -6,7 +6,7 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta charset="utf-8" />
-    <title>{{ page.title }} | {{ page.branch }}</title>
+    <title>{{ site.title }}</title>
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
     <!-- Bootstrap CSS only -->
     <link
@@ -17,14 +17,11 @@
     />
   </head>
 
-  <!-- style="background-image: url({{ '/assets/images/bg-2.jpeg' | relative_url }}); -->
-  <!-- background-size: cover;" -->
-
   <body
     style="background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }});
     background-size: cover;"
   >
-    {% include header.html %} {{ content}} {% include footer.html %}
+    {{ content}} {% include footer.html %}
     <!-- Bootstrap - JS, Popper.js, and jQuery -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
