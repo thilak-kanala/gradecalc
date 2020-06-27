@@ -3,6 +3,11 @@ var marks_form = document.getElementById("marks");
 var form_inputs = document.forms["marks"].getElementsByTagName("input");
 
 get_letter_grade = (total) => {
+
+  total = Math.round(total);
+
+  console.log(total);
+
   if (total >= 90) {
     return ["A+", 10];
   } else if (total >= 80) {
