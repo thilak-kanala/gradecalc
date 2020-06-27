@@ -417,3 +417,136 @@ grade_cce = () => {
 
   result_div.innerHTML += result_div_template;
 };
+
+grade_it = () => {
+  // clear result field
+  result_div.innerHTML = "";
+
+  var subject_index = -1;
+  var subjects = [
+    { name: "CNP", grade: ["-", -1, -1], credits: 4 },
+    { name: "OS", grade: ["-", -1, -1], credits: 4 },
+    { name: "DAA", grade: ["-", -1, -1], credits: 4 },
+    { name: "COMP", grade: ["-", -1, -1], credits: 3 },
+    { name: "MATH", grade: ["-", -1, -1], credits: 3 },
+    { name: "OS Lab", grade: ["-", -1, -1], credits: 1 },
+    { name: "COMP Lab", grade: ["-", -1, -1], credits: 1 },
+    { name: "DAA Lab", grade: ["-", -1, -1], credits: 1 },
+  ];
+
+  /**
+   * index | value
+   * ------|--------------
+   * 0     | cnp sessional
+   * 1     | cnp assignment
+   * 2     | os sessional
+   * 3     | os assignment
+   * 4     | daa sessional
+   * 5     | daa sessional
+   * 6     | comp sessional
+   * 7     | comp sessional
+   * 8     | math sessional
+   * 9     | math sessional
+   * 10    | os lab
+   * 11    | comp lab
+   * 12    | daa lab
+   * 13    | prev_gpa
+   */
+
+  let prev_gpa = parseFloat(form_inputs[13].value);
+
+  // calculate theory grades
+  for (let x = 0; x <= 9; x += 2) {
+    sessional_score = parseFloat(form_inputs[x].value);
+    assignment_score = parseFloat(form_inputs[x + 1].value);
+
+    let IA = parseFloat(sessional_score + assignment_score); // max value 50
+    let ES = parseFloat(0.5 * IA + 2.5 * prev_gpa); // max value 50
+    let total = parseFloat(IA + ES); // max value 100
+
+    subject_index++;
+    subjects[subject_index]["grade"] = get_letter_grade(total);
+  }
+
+  // calculate lab grades
+  for (let x = 10; x <= 12; x += 1) {
+    total = parseFloat(form_inputs[x].value);
+    subject_index++;
+    subjects[subject_index]["grade"] = get_letter_grade(total);
+  }
+
+  // update total in page
+  let final_grade = 0;
+  let total_credits = 21;
+  for (let x = 0; x < subjects.length; x += 1) {
+    final_grade += parseFloat(subjects[x]["grade"][1]) * subjects[x]["credits"];
+  }
+  final_grade /= total_credits;
+
+  subject_index = -1;
+  result_div_template = `
+  <div class="h2 mx-auto my-3 p-2 shadow-lg bg-success rounded-lg" 
+  style="width: max-content; background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }})">
+    GPA : ${final_grade.toFixed(2)}
+  </div>
+  <table class="table table-striped table-borderless text-light">
+      <thead>
+        <tr>
+          <th scope="col text-right"><u>Subject</u></th>
+          <th scope="col"><u>Grade</u></th>
+          <th scope="col"><u>Total</u></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">CNP</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+        </tr>
+        <tr>
+          <th scope="row">OS</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+        <tr>
+          <th scope="row">DAA</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+        <tr>
+          <th scope="row">COMP</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+        <tr>
+          <th scope="row">MATH</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+        <tr>
+          <th scope="row">OS Lab</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+        <tr>
+          <th scope="row">COMP Lab</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+        <tr>
+          <th scope="row">DAA Lab</th>
+          <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
+        </tr>
+      </tbody>
+    </table>`;
+
+  result_div.innerHTML += result_div_template;
+};
