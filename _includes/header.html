@@ -3,8 +3,45 @@
   style="background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }});
   background-size: cover;"
 >
-  <a class="navbar-brand btn btn-outline-dark mx-5 my-2 pt-2" href="{{ 'index.html' | relative_url }}"
-    ><h3>Grade Calculator</h3></a
-  >
-  <a class="navbar-brand btn btn-outline-info mx-5 my-2" href="{{ 'about.html' | relative_url }}">About</a>
+  <div>
+    <a
+      class="navbar-brand btn btn-outline-dark pt-2 my-2"
+      href="{{ 'index.html' | relative_url }}"
+      ><h2>Grade Calculator</h2></a
+    >
+
+    <div class="dropdown btn btn-outline-info p-1 pt-2 my-2">
+      <a
+        class="nav-link dropdown-toggle text-light h6"
+        href="#"
+        id="navbarDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ page.branch }}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ '/cse.html' | relative_url }}">Computer Science [CSE]</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{ '/ece.html' | relative_url }}">Electronics and Communications [ECE]</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{ '/cce.html' | relative_url }}">Computer and Communication [CCE]</a>
+        <!-- <div class="dropdown-divider"></div> -->
+        <!-- <a class="dropdown-item" href="#">Any branch</a> -->
+      </div>
+    </div>
+
+  </div>
+
+  
+
+  <div class="">
+    <a
+      class="navbar-brand btn btn-outline-info my-2"
+      href="{{ 'about.html' | relative_url }}"
+      >About</a
+    >
+  </div>
 </nav>
