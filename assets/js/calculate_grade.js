@@ -3,40 +3,38 @@ var marks_form = document.getElementById("marks");
 var form_inputs = document.forms["marks"].getElementsByTagName("input");
 
 get_letter_grade = (total) => {
-
   total = Math.round(total);
   if (total >= 90) {
-    return ["A+", 10];
+    return ["A+", 10, total];
   } else if (total >= 80) {
-    return ["A", 9];
+    return ["A", 9, total];
   } else if (total >= 70) {
-    return ["B", 8];
+    return ["B", 8, total];
   } else if (total >= 60) {
-    return ["C", 7];
+    return ["C", 7, total];
   } else if (total >= 50) {
-    return ["D", 6];
+    return ["D", 6, total];
   } else if (total >= 40) {
-    return ["E", 5];
+    return ["E", 5, total];
   } else {
     return ["F", 4];
   }
 };
 
 grade = () => {
-
   // clear result field
   result_div.innerHTML = "";
 
   var subject_index = -1;
   var subjects = [
-    { name: "DBS", grade: ["-", -1], credits: 3 },
-    { name: "DAA", grade: ["-", -1], credits: 4 },
-    { name: "ES", grade: ["-", -1], credits: 4 },
-    { name: "FLAT", grade: ["-", -1], credits: 3 },
-    { name: "MATH", grade: ["-", -1], credits: 3 },
-    { name: "Algorithms Lab", grade: ["-", -1], credits: 1 },
-    { name: "Database Systems Lab", grade: ["-", -1], credits: 2 },
-    { name: "Embedded Systems Lab", grade: ["-", -1], credits: 1 },
+    { name: "DBS", grade: ["-", -1, -1], credits: 3 },
+    { name: "DAA", grade: ["-", -1, -1], credits: 4 },
+    { name: "ES", grade: ["-", -1, -1], credits: 4 },
+    { name: "FLAT", grade: ["-", -1, -1], credits: 3 },
+    { name: "MATH", grade: ["-", -1, -1], credits: 3 },
+    { name: "Algorithms Lab", grade: ["-", -1, -1], credits: 1 },
+    { name: "Database Systems Lab", grade: ["-", -1, -1], credits: 2 },
+    { name: "Embedded Systems Lab", grade: ["-", -1, -1], credits: 1 },
   ];
 
   /**
@@ -66,7 +64,7 @@ grade = () => {
     assignment_score = parseFloat(form_inputs[x + 1].value);
 
     let IA = parseFloat(sessional_score + assignment_score); // max value 50
-    let ES = parseFloat((0.5 * IA) + (2.5 * prev_gpa)); // max value 50
+    let ES = parseFloat(0.5 * IA + 2.5 * prev_gpa); // max value 50
     let total = parseFloat(IA + ES); // max value 100
 
     subject_index++;
@@ -99,40 +97,56 @@ grade = () => {
         <tr>
           <th scope="col text-right"><u>Subject</u></th>
           <th scope="col"><u>Grade</u></th>
+          <th scope="col"><u>Total</u></th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <th scope="row">DBMS</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
         </tr>
         <tr>
           <th scope="row">DAA</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
         <tr>
           <th scope="row">ES</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
         <tr>
           <th scope="row">FLAT</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
         <tr>
           <th scope="row">MATH</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
         <tr>
           <th scope="row">Algorithms Lab</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
         <tr>
           <th scope="row">Database Systems Lab</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
         <tr>
           <th scope="row">Embedded Systems Lab</th>
           <td>${subjects[++subject_index]["grade"][0]}</td>
+          <td>${subjects[subject_index]["grade"][2]}</td>
+
         </tr>
       </tbody>
     </table>`;
