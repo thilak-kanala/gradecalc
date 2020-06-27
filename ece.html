@@ -183,7 +183,7 @@ branch: Electronics and Communications
         class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
       >
         <div class="card-body">
-          <h5 class="card-title text-center">ECD Lab</h5>
+          <h5 class="card-title text-center">ECD Lab (2 credits) </h5>
           <hr class="bg-dark" />
           <label for="s7-total">Total</label><br />
           <input
@@ -193,34 +193,6 @@ branch: Electronics and Communications
             id="s7-total"
             name="s7-total"
           />
-
-          <div class="my-2 h5">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="credits"
-                id="2-credits"
-                value="option1"
-                checked
-              />
-              <label class="form-check-label" for="2-credits">
-                2 Credits
-              </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="credits"
-                id="1-credit"
-                value="option2"
-              />
-              <label class="form-check-label" for="1-credit">
-                1 Credit
-              </label>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -237,7 +209,7 @@ branch: Electronics and Communications
     </div>
 
     <div class="mx-auto" style="width: max-content;">
-      <button type="button" class="btn btn-dark btn-lg" onclick="grade_ece()">
+      <button type="button" class="btn btn-dark btn-lg" onclick="grade('ece')">
         Get Results
       </button>
     </div>
