@@ -5,9 +5,6 @@ var form_inputs = document.forms["marks"].getElementsByTagName("input");
 get_letter_grade = (total) => {
 
   total = Math.round(total);
-
-  console.log(total);
-
   if (total >= 90) {
     return ["A+", 10];
   } else if (total >= 80) {
@@ -26,24 +23,9 @@ get_letter_grade = (total) => {
 };
 
 grade = () => {
-  // testing
-  // for (let x = 0; x < form_inputs.length; x += 1) {
-  //     form_inputs[x].value = 0;
-  // }
 
   // clear result field
   result_div.innerHTML = "";
-
-  // var subjects = [
-  //   { DBS: 42 },
-  //   { DAA: 42 },
-  //   { ES: 42 },
-  //   { FLAT: 42 },
-  //   { MATH: 42 },
-  //   { "Algorithms Lab": 42 },
-  //   { "Database Systems Lab": 42 },
-  //   { "Embedded Systems Lab": 42 },
-  // ];
 
   var subject_index = -1;
   var subjects = [
@@ -157,5 +139,3 @@ grade = () => {
 
   result_div.innerHTML += result_div_template;
 };
-
-// document.getElementById('submit').addEventListener("click", theory_grade());
