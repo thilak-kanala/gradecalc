@@ -3,17 +3,17 @@ var marks_form = document.getElementById("marks");
 var form_inputs = document.forms["marks"].getElementsByTagName("input");
 
 get_letter_grade = (total) => {
-  if (total >= 90 && total < 100) {
+  if (total >= 90) {
     return ["A+", 10];
-  } else if (total >= 80 && total < 89) {
+  } else if (total >= 80) {
     return ["A", 9];
-  } else if (total >= 70 && total < 79) {
+  } else if (total >= 70) {
     return ["B", 8];
-  } else if (total >= 60 && total < 69) {
+  } else if (total >= 60) {
     return ["C", 7];
-  } else if (total >= 50 && total < 59) {
+  } else if (total >= 50) {
     return ["D", 6];
-  } else if (total >= 40 && total < 49) {
+  } else if (total >= 40) {
     return ["E", 5];
   } else {
     return ["F", 4];
@@ -28,8 +28,6 @@ grade = () => {
 
   // clear result field
   result_div.innerHTML = "";
-
-  console.log("1");
 
   // var subjects = [
   //   { DBS: 42 },
@@ -80,9 +78,9 @@ grade = () => {
     sessional_score = parseFloat(form_inputs[x].value);
     assignment_score = parseFloat(form_inputs[x + 1].value);
 
-    let IA = sessional_score + assignment_score; // max value 50
-    let ES = (0.5 * IA) + (2.5 * prev_gpa); // max value 50
-    let total = IA + ES; // max value 100
+    let IA = parseFloat(sessional_score + assignment_score); // max value 50
+    let ES = parseFloat((0.5 * IA) + (2.5 * prev_gpa)); // max value 50
+    let total = parseFloat(IA + ES); // max value 100
 
     subject_index++;
     subjects[subject_index]["grade"] = get_letter_grade(total);
@@ -107,7 +105,7 @@ grade = () => {
   result_div_template = `
   <div class="h2 mx-auto my-3 p-2 shadow-lg bg-success rounded-lg" 
   style="width: max-content; background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }})">
-    GPA : ${ final_grade.toFixed(2) }
+    GPA : ${final_grade.toFixed(2)}
   </div>
   <table class="table table-striped table-borderless text-light">
       <thead>
