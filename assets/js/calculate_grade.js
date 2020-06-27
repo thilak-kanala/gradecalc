@@ -5,15 +5,15 @@ var form_inputs = document.forms["marks"].getElementsByTagName("input");
 get_letter_grade = (total) => {
   if (total >= 90 && total <= 100) {
     return ["A+", 10];
-  } else if (total >= 80 && total <= 89) {
+  } else if (total >= 80 && total < 89) {
     return ["A", 9];
-  } else if (total >= 70 && total <= 79) {
+  } else if (total >= 70 && total < 79) {
     return ["B", 8];
-  } else if (total >= 60 && total <= 69) {
+  } else if (total >= 60 && total < 69) {
     return ["C", 7];
-  } else if (total >= 50 && total <= 59) {
+  } else if (total >= 50 && total < 59) {
     return ["D", 6];
-  } else if (total >= 40 && total <= 49) {
+  } else if (total >= 40 && total < 49) {
     return ["E", 5];
   } else {
     return ["F", 4];
