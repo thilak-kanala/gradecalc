@@ -21,9 +21,17 @@ var branches = {
   "Computer Science": {
     theory: [
       { name: "Database Systems", grade: ["-", -1, -1], credits: 3 },
-      { name: "Design and Analysis of Algorithms", grade: ["-", -1, -1], credits: 4 },
+      {
+        name: "Design and Analysis of Algorithms",
+        grade: ["-", -1, -1],
+        credits: 4,
+      },
       { name: "Embedded Systems", grade: ["-", -1, -1], credits: 4 },
-      { name: "Formal Languages and Automata Theory", grade: ["-", -1, -1], credits: 3 },
+      {
+        name: "Formal Languages and Automata Theory",
+        grade: ["-", -1, -1],
+        credits: 3,
+      },
       { name: "MATH - IV", grade: ["-", -1, -1], credits: 3 },
     ],
 
@@ -47,7 +55,11 @@ var branches = {
 
     labs: [
       { name: "VLSI Lab", grade: ["-", -1, -1], credits: 1 },
-      { name: "Electronic Circuit Design Lab", grade: ["-", -1, -1], credits: 2 },
+      {
+        name: "Electronic Circuit Design Lab",
+        grade: ["-", -1, -1],
+        credits: 2,
+      },
     ],
 
     total_credits: 21,
@@ -55,7 +67,11 @@ var branches = {
 
   "Computer & Communication": {
     theory: [
-      { name: "Design and Analysis of Algorithms", grade: ["-", -1, -1], credits: 4 },
+      {
+        name: "Design and Analysis of Algorithms",
+        grade: ["-", -1, -1],
+        credits: 4,
+      },
       { name: "Operating Systems", grade: ["-", -1, -1], credits: 4 },
       { name: "Database Systems", grade: ["-", -1, -1], credits: 3 },
       { name: "Computer Network Protocols", grade: ["-", -1, -1], credits: 4 },
@@ -75,8 +91,16 @@ var branches = {
     theory: [
       { name: "Computer Network Protocols", grade: ["-", -1, -1], credits: 4 },
       { name: "Operating Systems", grade: ["-", -1, -1], credits: 4 },
-      { name: "Design and Analysis of Algorithms", grade: ["-", -1, -1], credits: 4 },
-      { name: "Computer Organization & Microprocessor Systems", grade: ["-", -1, -1], credits: 3 },
+      {
+        name: "Design and Analysis of Algorithms",
+        grade: ["-", -1, -1],
+        credits: 4,
+      },
+      {
+        name: "Computer Organization & Microprocessor Systems",
+        grade: ["-", -1, -1],
+        credits: 3,
+      },
       { name: "Math - IV", grade: ["-", -1, -1], credits: 3 },
     ],
     labs: [
@@ -359,7 +383,7 @@ var branches = {
     total_credits: 21,
   },
 
-  "Biotechnology": {
+  Biotechnology: {
     theory: [
       {
         name: "Clinical & Biochemical Engineering Thermodynamics",
@@ -603,12 +627,7 @@ generate = (branch) => {
     id="result"
     class="col-sm-12 col-md-6 mx-auto m-5 h5 border border-secondary rounded-lg"
     ></div>
-    </div>
-    
-    <script
-    type="text/javascript"
-    src="{{ '/assets/js/calculate_grade.js' | relative_url }}"
-    ></script>`;
+    </div>`;
 
   content.innerHTML = content_template;
 };
