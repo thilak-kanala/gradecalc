@@ -44,7 +44,7 @@ var branches = {
     total_credits: 21,
   },
 
-  "Electronics and Communication": {
+  "Electronics & Communication": {
     theory: [
       { name: "Electromagnetic Waves", grade: ["-", -1, -1], credits: 4 },
       { name: "Linear Integrated Circuits", grade: ["-", -1, -1], credits: 4 },
