@@ -1,22 +1,4 @@
-get_letter_grade = (total) => {
-  total = Math.round(total);
-  if (total >= 90) {
-    return ["A+", 10, total];
-  } else if (total >= 80) {
-    return ["A", 9, total];
-  } else if (total >= 70) {
-    return ["B", 8, total];
-  } else if (total >= 60) {
-    return ["C", 7, total];
-  } else if (total >= 50) {
-    return ["D", 6, total];
-  } else if (total >= 40) {
-    return ["E", 5, total];
-  } else {
-    return ["F", 4, total];
-  }
-};
-
+// Details of all branches
 var branches = {
   "Computer Science": {
     theory: [
@@ -129,6 +111,47 @@ var branches = {
       },
       {
         name: "Numerical Computation Lab - I",
+        grade: ["-", -1, -1],
+        credits: 1,
+      },
+    ],
+
+    total_credits: 21,
+  },
+
+  "Electrical & Electronics": {
+    theory: [
+      {
+        name: "Electrical Machinery - II",
+        grade: ["-", -1, -1],
+        credits: 3,
+      },
+      {
+        name: "Generation Transmission & Distribution",
+        grade: ["-", -1, -1],
+        credits: 4,
+      },
+      {
+        name: "Linear Control Theory",
+        grade: ["-", -1, -1],
+        credits: 4,
+      },
+      {
+        name: "Microcontrollers",
+        grade: ["-", -1, -1],
+        credits: 4,
+      },
+      { name: "Math - IV", grade: ["-", -1, -1], credits: 3 },
+    ],
+
+    labs: [
+      {
+        name: "Electrical Machinery Lab",
+        grade: ["-", -1, -1],
+        credits: 2,
+      },
+      {
+        name: "Microcontroller Lab",
         grade: ["-", -1, -1],
         credits: 1,
       },
@@ -512,124 +535,126 @@ var branches = {
   },
 };
 
+get_letter_grade = (total) => {
+  total = Math.round(total);
+  if (total >= 90) {
+    return ["A+", 10, total];
+  } else if (total >= 80) {
+    return ["A", 9, total];
+  } else if (total >= 70) {
+    return ["B", 8, total];
+  } else if (total >= 60) {
+    return ["C", 7, total];
+  } else if (total >= 50) {
+    return ["D", 6, total];
+  } else if (total >= 40) {
+    return ["E", 5, total];
+  } else {
+    return ["F", 4, total];
+  }
+};
+
+get_therory_input_template = (subject_name) => {
+  return `
+    <div
+    class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+    >
+    <div class="card-body">
+      <h5 class="card-title text-center">${subject_name}</h5>
+      <hr class="bg-dark" />
+      <label for="${subject_name + "-sessional"}">Sessional</label><br />
+      <input
+        step="any"
+        type="number"
+        class="form-control bg-dark border border-dark text-white"
+        id="${subject_name + "-sessional"}"
+        name="${subject_name + "-sessional"}"
+      />
+      <br />
+      <label for="${subject_name + "-assignment"}">Assignment</label><br />
+      <input
+        step="any"
+        type="number"
+        class="form-control bg-dark border border-dark text-white"
+        id="${subject_name + "-assignment"}"
+        name="${subject_name + "-assignment"}"
+      />
+    </div>
+    </div>`;
+};
+
+get_lab_input_template = (subject_name) => {
+  return `<div
+    class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
+    >
+    <div class="card-body">
+      <h5 class="card-title text-center">${subject_name}</h5>
+      <hr class="bg-dark" />
+      <label for="${subject_name + "-total"}">Total</label><br />
+      <input
+        step="any"
+        type="number"
+        class="form-control bg-dark border border-dark text-white"
+        id="${subject_name + "-total"}"
+        name="${subject_name + "-total"}"
+      />
+    </div>
+    </div>`;
+};
+
+get_dropdown_branch_link = (branch) => {
+  return `
+    <button class="dropdown-item" onclick="generate('${branch}')">
+    ${branch}
+    </button>
+    <div class="dropdown-divider"></div>`;
+};
+
 generate = (branch) => {
-  var content = document.getElementById("content");
+  // keep track of page
+  current_branch = branch;
+
+  var content_div = document.getElementById("content");
   var subjects = branches[branch];
   var theory_len = subjects["theory"].length;
   var labs_len = subjects["labs"].length;
   var content_template = "";
 
-  var branch_name = document.getElementById("branch-name");
-  branch_name.innerHTML = branch;
+  // display branch name in the brach selector in header
+  document.getElementById("branch-name").innerHTML = branch;
 
-  content_template += `
-  <div
-  class="container shadow-lg p-2 text-light border border-dark rounded-lg"
-  >
-  <form id="marks">
-    <!-- Theory -->
-    <div class="mx-5">
-      <p class="display-4 mb-0">
-        Theory
-      </p>
-      <p class="lead">
-        <em> Enter sessional score (0-30) and assignment score (0-20)</em>
-      </p>
-    </div>
-    <div class="row m-3 justify-content-around">`;
+  // clear result section
+  document.getElementById("result").innerHTML = "";
 
-  // theory
+  // generate html for theory input section
+  content_template = "";
   for (let x = 0; x < theory_len; x++) {
-    content_template += `
-    <div
-      class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
-    >
-      <div class="card-body">
-        <h5 class="card-title text-center">${subjects["theory"][x]["name"]}</h5>
-        <hr class="bg-dark" />
-        <label for="${
-          subjects["theory"][x]["name"] + "-sessional"
-        }">Sessional</label><br />
-        <input
-          step="any"
-          type="number"
-          class="form-control bg-dark border border-dark text-white"
-          id="${subjects["theory"][x]["name"] + "-sessional"}"
-          name="${subjects["theory"][x]["name"] + "-sessional"}"
-        />
-        <br />
-        <label for="${
-          subjects["theory"][x]["name"] + "-assignment"
-        }">Assignment</label><br />
-        <input
-          step="any"
-          type="number"
-          class="form-control bg-dark border border-dark text-white"
-          id="${subjects["theory"][x]["name"] + "-assignment"}"
-          name="${subjects["theory"][x]["name"] + "-assignment"}"
-        />
-      </div>
-    </div>`;
+    content_template += get_therory_input_template(
+      subjects["theory"][x]["name"]
+    );
   }
-
+  // end theory input section
   content_template += "</div>";
 
-  // labs
-  content_template += `<div class="mx-5">
-    <h1 class="display-4 mb-0">Lab</h1>
-    <p class="lead"><em> Enter lab score (0-100) </em></p>
-    </div>
-    <div class="row m-3 justify-content-around">`;
+  // update frontend
+  document.getElementById("theory-input-section").innerHTML = content_template;
 
+  // generate html for lab input section
+  content_template = "";
   for (let x = 0; x < labs_len; x++) {
-    content_template += `
-    <div
-        class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
-      >
-        <div class="card-body">
-          <h5 class="card-title text-center">${subjects["labs"][x]["name"]}</h5>
-          <hr class="bg-dark" />
-          <label for="${
-            subjects["labs"][x]["name"] + "-total"
-          }">Total</label><br />
-          <input
-            step="any"
-            type="number"
-            class="form-control bg-dark border border-dark text-white"
-            id="${subjects["labs"][x]["name"] + "-total"}"
-            name="${subjects["labs"][x]["name"] + "-total"}"
-          />
-        </div>
-      </div>`;
+    content_template += get_lab_input_template(subjects["labs"][x]["name"]);
   }
 
+  // end lab input section
   content_template += "</div>";
 
-  content_template += `<div class="form-group m-4">
-    <label for="prev_gpa" class="h1">Previous Semester GPA</label>
-    <input
-      step="any"
-      type="number"
-      class="form-control bg-dark border border-dark text-white"
-      id="prev_gpa"
-      name="previous gpa"
-    />
-    </div>
-    
-    <div class="mx-auto" style="width: max-content;">
-      <button type="button" class="btn btn-dark btn-lg" onclick="grade('${branch}')">
-        Get Results
-      </button>
-    </div>
-    </form>
-    
-    <div
-    id="result"
-    class="col-sm-12 col-md-6 mx-auto m-5 h5 border border-secondary rounded-lg"
-    ></div>
-    </div>`;
+  // update frontend
+  document.getElementById("labs-input-section").innerHTML = content_template;
 
-  content.innerHTML = content_template;
+  // change onclick of result button to call grade function with appropriate branch
+  let result_btn = document.getElementById("result-btn");
+  // result_btn.removeAttribute("onclick");
+  result_btn.setAttribute("onclick", `grade('${branch}')`);
 };
 
 grade = (branch) => {
@@ -726,4 +751,20 @@ grade = (branch) => {
   // end
   result_div_template += "</tbody></table>";
   result_div.innerHTML += result_div_template;
+};
+
+// initial front end
+window.onload = function () {
+  // generate branch selector dropdown
+  let branch_names = Object.keys(branches);
+  let content_template = "";
+  for (let x = 0; x < branch_names.length; x++) {
+    content_template += get_dropdown_branch_link(branch_names[x]);
+  }
+  document.getElementById(
+    "dropdown-items-section"
+  ).innerHTML = content_template;
+
+  // initial branch page
+  generate("Computer Science");
 };
