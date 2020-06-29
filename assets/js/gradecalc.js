@@ -1,5 +1,5 @@
 // Details of all branches
-var branches = {
+const branches = {
   "Computer Science": {
     theory: [
       { name: "Database Systems", grade: ["-", -1, -1], credits: 3 },
@@ -614,11 +614,11 @@ generate = (branch) => {
   // keep track of page
   current_branch = branch;
 
-  var content_div = document.getElementById("content");
-  var subjects = branches[branch];
-  var theory_len = subjects["theory"].length;
-  var labs_len = subjects["labs"].length;
-  var content_template = "";
+  let content_div = document.getElementById("content");
+  let subjects = branches[branch];
+  let theory_len = subjects["theory"].length;
+  let labs_len = subjects["labs"].length;
+  let content_template = "";
 
   // display branch name in the brach selector in header
   document.getElementById("branch-name").innerHTML = branch;
@@ -658,25 +658,29 @@ generate = (branch) => {
 };
 
 grade = (branch) => {
-  var result_div = document.getElementById("result");
-  var form_inputs = document.forms["marks"].getElementsByTagName("input");
+  let result_div = document.getElementById("result");
+  let form_inputs = document.forms["marks"].getElementsByTagName("input");
 
   // clear result field
   result_div.innerHTML = "";
 
-  var subjects = branches[branch];
-  var theory_len = subjects["theory"].length;
-  var labs_len = subjects["labs"].length;
-  // var total_len = theory_len + labs_len;
-  var result_div_template = "";
+  let subjects = branches[branch];
+  let theory_len = subjects["theory"].length;
+  let labs_len = subjects["labs"].length;
+  // let total_len = theory_len + labs_len;
+  let result_div_template = "";
 
-  var prev_gpa = parseFloat(form_inputs[2 * theory_len + labs_len].value);
+  let prev_gpa = parseFloat(form_inputs[2 * theory_len + labs_len].value);
+  prev_gpa = isNaN(prev_gpa) ? 0 : prev_gpa;
 
   // calculate theory grades
-  var theory_index = -1;
+  let theory_index = -1;
   for (let x = 0; x < 2 * theory_len; x += 2) {
     sessional_score = parseFloat(form_inputs[x].value);
     assignment_score = parseFloat(form_inputs[x + 1].value);
+
+    sessional_score = isNaN(sessional_score) ? 0 : sessional_score;
+    assignment_score = isNaN(assignment_score) ? 0 : assignment_score;
 
     let IA = parseFloat(sessional_score + assignment_score); // max value 50
     let ES = parseFloat(0.5 * IA + 2.5 * prev_gpa); // max value 50
@@ -687,9 +691,10 @@ grade = (branch) => {
   }
 
   // calculate lab grades
-  var lab_index = -1;
+  let lab_index = -1;
   for (let x = 2 * theory_len; x < 2 * theory_len + labs_len; x += 1) {
     total = parseFloat(form_inputs[x].value);
+    total = isNaN(total) ? 0 : total;
 
     lab_index++;
     subjects["labs"][lab_index]["grade"] = get_letter_grade(total);
@@ -754,7 +759,7 @@ grade = (branch) => {
 };
 
 // initial front end
-window.onload = function () {
+window.onload = () => {
   // generate branch selector dropdown
   let branch_names = Object.keys(branches);
   let content_template = "";
