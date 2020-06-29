@@ -554,7 +554,7 @@ get_letter_grade = (total) => {
   }
 };
 
-get_therory_input_template = (subject_name) => {
+get_theory_input_template = (subject_name) => {
   return `
     <div
     class="col-sm-12 col-md-4 col-lg shadow-lg p-2 m-3 border border-secondary rounded form-group"
@@ -604,8 +604,7 @@ get_lab_input_template = (subject_name) => {
 
 get_result_template = (subjects, final_grade) => {
   let content_template = "";
-  content_template += 
-  `<div class="h2 mx-auto my-3 p-2 shadow-lg bg-success rounded-lg" 
+  content_template += `<div class="h2 mx-auto my-3 p-2 shadow-lg bg-success rounded-lg" 
   style="width: max-content; background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }})">
     GPA : ${final_grade.toFixed(2)}
   </div>
@@ -669,7 +668,7 @@ generate = (branch) => {
   // generate html for theory input section
   content_template = "";
   for (let x = 0; x < theory_len; x++) {
-    content_template += get_therory_input_template(
+    content_template += get_theory_input_template(
       subjects["theory"][x]["name"]
     );
   }
