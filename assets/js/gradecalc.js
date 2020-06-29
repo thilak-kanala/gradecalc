@@ -602,6 +602,49 @@ get_lab_input_template = (subject_name) => {
     </div>`;
 };
 
+get_result_template = (subjects, final_grade) => {
+  let content_template = "";
+  content_template += 
+  `<div class="h2 mx-auto my-3 p-2 shadow-lg bg-success rounded-lg" 
+  style="width: max-content; background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }})">
+    GPA : ${final_grade.toFixed(2)}
+  </div>
+  <table class="table table-striped table-borderless text-light">
+  <thead>
+  <tr>
+    <th scope="col text-right"><u>Subject</u></th>
+    <th scope="col"><u>Grade</u></th>
+    <th scope="col"><u>Total</u></th>
+  </tr>
+  </thead>
+  <tbody>`;
+
+  // theory
+  for (let x = 0; x < subjects["theory"].length; x += 1) {
+    content_template += `
+    <tr>
+    <th scope="row">${subjects["theory"][x]["name"]}</th>
+    <td>${subjects["theory"][x]["grade"][0]}</td>
+    <td>${subjects["theory"][x]["grade"][2]}</td>
+    </tr>`;
+  }
+
+  // lab
+  for (let x = 0; x < subjects["labs"].length; x += 1) {
+    content_template += `
+    <tr>
+    <th scope="row">${subjects["labs"][x]["name"]}</th>
+    <td>${subjects["labs"][x]["grade"][0]}</td>
+    <td>${subjects["labs"][x]["grade"][2]}</td>
+    </tr>`;
+  }
+
+  // end
+  content_template += "</tbody></table>";
+
+  return content_template;
+};
+
 get_dropdown_branch_link = (branch) => {
   return `
     <button class="dropdown-item" onclick="generate('${branch}')">
@@ -611,9 +654,6 @@ get_dropdown_branch_link = (branch) => {
 };
 
 generate = (branch) => {
-  // keep track of page
-  current_branch = branch;
-
   let content_div = document.getElementById("content");
   let subjects = branches[branch];
   let theory_len = subjects["theory"].length;
@@ -667,7 +707,6 @@ grade = (branch) => {
   let subjects = branches[branch];
   let theory_len = subjects["theory"].length;
   let labs_len = subjects["labs"].length;
-  // let total_len = theory_len + labs_len;
   let result_div_template = "";
 
   let prev_gpa = parseFloat(form_inputs[2 * theory_len + labs_len].value);
@@ -716,46 +755,9 @@ grade = (branch) => {
       parseFloat(subjects["labs"][x]["grade"][1]) *
       subjects["labs"][x]["credits"];
   }
-
   final_grade /= total_credits;
 
-  result_div_template += `<div class="h2 mx-auto my-3 p-2 shadow-lg bg-success rounded-lg" 
-    style="width: max-content; background-image: url({{ '/assets/images/bg-4.jpg' | relative_url }})">
-      GPA : ${final_grade.toFixed(2)}
-    </div>
-    <table class="table table-striped table-borderless text-light">
-    <thead>
-    <tr>
-      <th scope="col text-right"><u>Subject</u></th>
-      <th scope="col"><u>Grade</u></th>
-      <th scope="col"><u>Total</u></th>
-    </tr>
-    </thead>
-    <tbody>`;
-
-  // theory
-  for (let x = 0; x < theory_len; x += 1) {
-    result_div_template += `
-      <tr>
-      <th scope="row">${subjects["theory"][x]["name"]}</th>
-      <td>${subjects["theory"][x]["grade"][0]}</td>
-      <td>${subjects["theory"][x]["grade"][2]}</td>
-      </tr>`;
-  }
-
-  // lab
-  for (let x = 0; x < labs_len; x += 1) {
-    result_div_template += `
-      <tr>
-      <th scope="row">${subjects["labs"][x]["name"]}</th>
-      <td>${subjects["labs"][x]["grade"][0]}</td>
-      <td>${subjects["labs"][x]["grade"][2]}</td>
-      </tr>`;
-  }
-
-  // end
-  result_div_template += "</tbody></table>";
-  result_div.innerHTML += result_div_template;
+  result_div.innerHTML += get_result_template(subjects, final_grade);
 };
 
 // initial front end
