@@ -536,7 +536,9 @@ const branches = {
 };
 
 get_letter_grade = (total) => {
-  total = Math.round(total);
+  if (total == null) return;
+  if (total > 100 || total < 0) return;
+  total = Math.ceil(total);
   if (total >= 90) {
     return ["A+", 10, total];
   } else if (total >= 80) {
